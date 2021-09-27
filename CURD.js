@@ -31,8 +31,26 @@ const getUserFruits = async (req, res) => {
     res.send(err);
   }
 };
+const deleteUserFruit = async (req, res) => {
+  try {
+    await FruitModel.findByIdAndDelete(req.params.id);
+    res.send("deleted");
+  } catch (err) {
+    res.send(err);
+  }
+};
+const updateUserFruit = async (req, res) => {
+  try {
+    await FruitModel.findByIdAndUpdate(req.params.id, req.body);
+    res.send("Updated");
+  } catch (err) {
+    res.send(err);
+  }
+};
 module.exports = {
   getAllFruits,
   createUserFruits,
   getUserFruits,
+  deleteUserFruit,
+  updateUserFruit,
 };

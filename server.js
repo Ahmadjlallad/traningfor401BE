@@ -11,7 +11,13 @@ mongoose.connect(process.env.DBURL, {});
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("connected to mongoDB"));
 
-const { getAllFruits, createUserFruits, getUserFruits } = require("./CURD");
+const {
+  getAllFruits,
+  createUserFruits,
+  getUserFruits,
+  deleteUserFruit,
+  updateUserFruit,
+} = require("./CURD");
 
 // * 1 - TODO: add routes get all fruits  * ✔
 app.get("/getFruits", getAllFruits); // req, res
@@ -19,6 +25,9 @@ app.get("/getFruits", getAllFruits); // req, res
 app.post("/fruit", createUserFruits);
 // * TODO: get user favorite fruit route  * ✔
 app.get("/fruit", getUserFruits);
+
+app.delete("/fruit/:id", deleteUserFruit);
+app.put("/fruit/:id", updateUserFruit);
 app.listen(process.env.PORT, () =>
   console.log(`listening on port ${process.env.PORT}`)
 );
